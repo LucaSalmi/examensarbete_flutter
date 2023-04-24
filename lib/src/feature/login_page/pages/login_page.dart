@@ -36,7 +36,7 @@ class LoginPage extends ConsumerWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  context.go(Routes.home.route);
+                  context.push(Routes.home.route);
                 },
                 child: const Text('Login'),
               ),
