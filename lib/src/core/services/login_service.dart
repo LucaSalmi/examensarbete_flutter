@@ -4,6 +4,8 @@ import 'package:login_ex_arbete/src/core/models/user.dart';
 class LoginService {
   final _auth = FirebaseAuth.instance;
 
+  bool get isSignedIn => _auth.currentUser != null;
+
   Future<AppUser?> signInWithEmailAndPassword(String email, String password) async {
     try {
       final userCredential = await _auth.signInWithEmailAndPassword(

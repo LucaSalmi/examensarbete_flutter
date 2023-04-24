@@ -58,7 +58,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 ref.read(passwordinputProvider.notifier).state!,
                               );
                           if (user != null && user.error == null && context.mounted) {
-                            context.push(Routes.home.route);
+                            context.go(Routes.home.route);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(user?.error ?? 'Something went wrong')),

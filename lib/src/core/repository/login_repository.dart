@@ -4,6 +4,8 @@ class LoginRepository {
   LoginRepository({required LoginService authService})
       : _authService = authService;
 
+      bool get isSignedIn => _authService.isSignedIn;
+
   Future<AppUser?> createUser(String email, String password) async =>
       await _authService.createUserWithEmailAndPassword(email, password);
 

@@ -10,8 +10,20 @@ class HomePage extends StatelessWidget {
         title: const Text('Home Page'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text('Welcome to the Home Page'),
+      body: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6.0),
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Colors.black, width: 1.0),
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              title: Text('Item $index'),
+            ),
+          );
+        },
       ),
     );
   }
