@@ -7,6 +7,8 @@ class AppTextField extends StatelessWidget {
     this.icon,
     this.maxCharacters,
     this.hideCharacters = false,
+    this.useValidator,
+    this.keyboardType,
     super.key,
   });
 
@@ -15,10 +17,14 @@ class AppTextField extends StatelessWidget {
   final Widget? icon;
   final int? maxCharacters;
   final bool hideCharacters;
+  final bool? useValidator;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (useValidator ?? false) ? formValidator : null,
+      keyboardType: keyboardType,
       onChanged: onChanged,
       maxLength: maxCharacters,
       obscureText: hideCharacters,
@@ -28,5 +34,12 @@ class AppTextField extends StatelessWidget {
         suffixIcon: icon,
       ),
     );
+  }
+
+  String? formValidator(value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter some text';
+    }
+    return null;
   }
 }

@@ -15,6 +15,10 @@ final GoRouter router = GoRouter(
       path: Routes.home.route,
       builder: (context, state) => const HomePage(),
     ),
+    GoRoute(
+      path: Routes.register.route,
+      builder: (context, state) => const RegisterUserPage(),
+    ),
   ],
   navigatorKey: _rootNavigatorKey,
   initialLocation: Routes.root.route, 
