@@ -15,6 +15,11 @@ class FirestoreService {
     return quizzes;
   }
 
+  void saveNewPost(UserPost post) {
+    final postToSave = post.copyWith(id: newPostDocId);
+    _postsCollection.doc(postToSave.id).set(postToSave.toJson());
+  }
+
   List<T> _getDataFromQuery<T>(
     QuerySnapshot<Map<String, dynamic>> querySnapshot, {
     T Function(Map<String, dynamic>)? jsonConverter,
@@ -34,6 +39,8 @@ class FirestoreService {
 
     return objectsList;
   }
+
+  String get newPostDocId => _postsCollection.doc().id;
 
 // ... Queries and CollectionReferences ...
   CollectionReference<Map<String, dynamic>> get _postsCollection =>
