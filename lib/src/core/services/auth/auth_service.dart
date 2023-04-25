@@ -6,6 +6,8 @@ class AuthService {
 
   bool get isSignedIn => _auth.currentUser != null;
 
+  void logOut() => _auth.signOut();
+
   Future<AppUser?> signInWithEmailAndPassword(String email, String password) async {
     try {
       final userCredential = await _auth.signInWithEmailAndPassword(

@@ -26,7 +26,7 @@ class FirestoreService {
   }) {
     assert(
       jsonConverter != null,
-      'firestoreFromMapconverter or jsonConverter should not be null',
+      'jsonConverter should not be null',
     );
 
     final List<T> objectsList = [];

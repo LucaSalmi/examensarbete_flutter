@@ -5,6 +5,9 @@ class AuthRepository {
 
   bool get isSignedIn => _authService.isSignedIn;
 
+  void logOut() => _authService.logOut();
+
+
   Future<AppUser?> createUser(String email, String password) async =>
       await _authService.createUserWithEmailAndPassword(email, password);
 

@@ -29,6 +29,10 @@ final routerProvider = Provider(
           path: Routes.register.route,
           builder: (context, state) => const RegisterUserPage(),
         ),
+        GoRoute(
+          path: Routes.craetePost.route,
+          builder: (context, state) => const CreatePostpage(),
+        ),
       ],
       redirect: (context, state) {
         // if the user is not logged in, they need to login
@@ -51,4 +55,4 @@ final routerProvider = Provider(
 );
 
 final authStateProvider =
-    StateProvider<bool>((ref) => ref.read(RepositoryProvider.auth).isSignedIn);
+    StateProvider<bool>((ref) => ref.watch(RepositoryProvider.auth).isSignedIn);
