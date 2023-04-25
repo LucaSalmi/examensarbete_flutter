@@ -38,9 +38,8 @@ class HomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(authStateProvider.notifier).state = false;
-          ref.read(RepositoryProvider.auth).logOut();
-        }, //context.push(Routes.craetePost.route),
+          context.push(Routes.craetePost.route);
+        },
         child: const Icon(Icons.create),
       ),
     );
