@@ -29,21 +29,31 @@ class HomePage extends ConsumerWidget {
       ),
       body: userPosts.when(
         data: (posts) {
-          return ListView.builder(
-            controller: scrollController,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            itemBuilder: (context, index) {
-              final i = index % posts.length; //<----to the right
-              final item = posts[i];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: UserPostCard(post: item),
-              );
-            },
-          );
+          posts.sort((a, b) => a.createdAt?.compareTo(b.createdAt ?? DateTime.now()) ?? 0);
+          final hasPosts = posts.isNotEmpty;
+          return hasPosts
+              ? ListView.builder(
+                  controller: scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  itemBuilder: (context, index) {
+                    if (posts.isNotEmpty) {
+                      final i = index % posts.length; //<----to the right
+                      final item = posts[i];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: UserPostCard(post: item),
+                      );
+                    }
+                  },
+                )
+              : const AppErrorWidget(
+                  errorMessage: 'No Posts Found, Check your internet connection',
+                );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => const Center(child: Text('Error')),
+        error: (error, stack) => AppErrorWidget(
+          errorMessage: error.toString(),
+        ),
       ),
       floatingActionButton: _buildFabs(
         isButtonVisible,
@@ -81,6 +91,7 @@ class HomePage extends ConsumerWidget {
             label: const Text('Back to top'),
           ),
         ),
+        const SizedBox(width: 10),
         FloatingActionButton(
           onPressed: () {
             context.push(Routes.craetePost.route);

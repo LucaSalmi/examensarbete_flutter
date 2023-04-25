@@ -5,8 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_post.freezed.dart';
 part 'user_post.g.dart';
 
-enum Status { idle, loading, error, success }
-
 @freezed
 class UserPost with _$UserPost {
   const factory UserPost({
@@ -14,7 +12,7 @@ class UserPost with _$UserPost {
     String? title,
     String? body,
     String? userName,
-    @Default(Status.idle) @JsonKey(ignore: true) Status saveStatus,
+    DateTime? createdAt,
   }) = _UserPost;
 
   factory UserPost.fromJson(Map<String, dynamic> json) => _$UserPostFromJson(json);

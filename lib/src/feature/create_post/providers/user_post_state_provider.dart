@@ -16,25 +16,13 @@ class UserPostState extends StateNotifier<UserPost> {
     state = state.copyWith(userName: author);
   }
 
-  Future saveToFirestore(WidgetRef ref) async {
-    setNewStatus(Status.loading);
+  void setCreatedTime() {
+    state = state.copyWith(createdAt: DateTime.now());
+  }
+
+  Future<bool> saveToFirestore(WidgetRef ref) async {
     setAuthor(ref.read(RepositoryProvider.auth).currentUserName ?? 'Anonymous');
-    final saveResult = await ref.read(RepositoryProvider.firestore).saveNewPost(state);
-    if (saveResult) {
-      resetState();
-      setNewStatus(Status.success);
-    } else {
-      setNewStatus(Status.error);
-    }
+    setCreatedTime();
+    return await ref.read(RepositoryProvider.firestore).saveNewPost(state);
   }
-
-  void setNewStatus(Status status) {
-    state = state.copyWith(saveStatus: status);
-  }
-
-  void resetState() {
-    state = const UserPost();
-  }
-
-  Status get status => state.saveStatus;
 }
