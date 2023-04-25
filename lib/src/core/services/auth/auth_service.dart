@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:login_ex_arbete/src/core/models/user.dart';
 
-class LoginService {
+class AuthService {
   final _auth = FirebaseAuth.instance;
 
   bool get isSignedIn => _auth.currentUser != null;
