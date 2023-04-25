@@ -4,6 +4,7 @@ class AuthRepository {
   AuthRepository({required AuthService authService}) : _authService = authService;
 
   bool get isSignedIn => _authService.isSignedIn;
+  String? get currentUserName => _authService.currentUserName;
 
   void logOut() => _authService.logOut();
 

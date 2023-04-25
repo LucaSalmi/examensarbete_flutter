@@ -22,13 +22,7 @@ class HomePage extends ConsumerWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6.0),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.black, width: 1.0),
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  title: Text(posts[index].body ?? 'Empty'),
-                ),
+                child: UserPostCard(post: posts[index]),
               );
             },
           );

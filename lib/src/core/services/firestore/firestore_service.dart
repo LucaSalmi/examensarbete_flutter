@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:login_ex_arbete/src/src.dart';
 
 class FirestoreService {
@@ -6,18 +7,24 @@ class FirestoreService {
 
   Future<Stream<List<UserPost>>> listenToUserPostCollection() async {
     final snapshots = _postsCollection.snapshots();
-    final quizzes = snapshots.map(
+    final posts = snapshots.map(
       (event) => _getDataFromQuery(
         event,
         jsonConverter: UserPost.fromJson,
       ),
     );
-    return quizzes;
+    return posts;
   }
 
-  void saveNewPost(UserPost post) {
+  Future<bool> saveNewPost(UserPost post) async {
     final postToSave = post.copyWith(id: newPostDocId);
-    _postsCollection.doc(postToSave.id).set(postToSave.toJson());
+    try {
+      await _postsCollection.doc(postToSave.id).set(postToSave.toJson());
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
   }
 
   List<T> _getDataFromQuery<T>(

@@ -5,6 +5,7 @@ class AuthService {
   final _auth = FirebaseAuth.instance;
 
   bool get isSignedIn => _auth.currentUser != null;
+  String? get currentUserName => _auth.currentUser?.displayName ?? _auth.currentUser?.email;
 
   void logOut() => _auth.signOut();
 

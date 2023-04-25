@@ -24,6 +24,8 @@ mixin _$UserPost {
   String? get title => throw _privateConstructorUsedError;
   String? get body => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  Status get saveStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +38,12 @@ abstract class $UserPostCopyWith<$Res> {
   factory $UserPostCopyWith(UserPost value, $Res Function(UserPost) then) =
       _$UserPostCopyWithImpl<$Res, UserPost>;
   @useResult
-  $Res call({String? id, String? title, String? body, String? userName});
+  $Res call(
+      {String? id,
+      String? title,
+      String? body,
+      String? userName,
+      @JsonKey(ignore: true) Status saveStatus});
 }
 
 /// @nodoc
@@ -56,6 +63,7 @@ class _$UserPostCopyWithImpl<$Res, $Val extends UserPost>
     Object? title = freezed,
     Object? body = freezed,
     Object? userName = freezed,
+    Object? saveStatus = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -74,6 +82,10 @@ class _$UserPostCopyWithImpl<$Res, $Val extends UserPost>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String?,
+      saveStatus: null == saveStatus
+          ? _value.saveStatus
+          : saveStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -85,7 +97,12 @@ abstract class _$$_UserPostCopyWith<$Res> implements $UserPostCopyWith<$Res> {
       __$$_UserPostCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String? title, String? body, String? userName});
+  $Res call(
+      {String? id,
+      String? title,
+      String? body,
+      String? userName,
+      @JsonKey(ignore: true) Status saveStatus});
 }
 
 /// @nodoc
@@ -103,6 +120,7 @@ class __$$_UserPostCopyWithImpl<$Res>
     Object? title = freezed,
     Object? body = freezed,
     Object? userName = freezed,
+    Object? saveStatus = null,
   }) {
     return _then(_$_UserPost(
       id: freezed == id
@@ -121,6 +139,10 @@ class __$$_UserPostCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String?,
+      saveStatus: null == saveStatus
+          ? _value.saveStatus
+          : saveStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -128,7 +150,12 @@ class __$$_UserPostCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserPost implements _UserPost {
-  const _$_UserPost({this.id, this.title, this.body, this.userName});
+  const _$_UserPost(
+      {this.id,
+      this.title,
+      this.body,
+      this.userName,
+      @JsonKey(ignore: true) this.saveStatus = Status.idle});
 
   factory _$_UserPost.fromJson(Map<String, dynamic> json) =>
       _$$_UserPostFromJson(json);
@@ -141,10 +168,13 @@ class _$_UserPost implements _UserPost {
   final String? body;
   @override
   final String? userName;
+  @override
+  @JsonKey(ignore: true)
+  final Status saveStatus;
 
   @override
   String toString() {
-    return 'UserPost(id: $id, title: $title, body: $body, userName: $userName)';
+    return 'UserPost(id: $id, title: $title, body: $body, userName: $userName, saveStatus: $saveStatus)';
   }
 
   @override
@@ -156,12 +186,15 @@ class _$_UserPost implements _UserPost {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.userName, userName) ||
-                other.userName == userName));
+                other.userName == userName) &&
+            (identical(other.saveStatus, saveStatus) ||
+                other.saveStatus == saveStatus));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, body, userName);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, body, userName, saveStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -182,7 +215,8 @@ abstract class _UserPost implements UserPost {
       {final String? id,
       final String? title,
       final String? body,
-      final String? userName}) = _$_UserPost;
+      final String? userName,
+      @JsonKey(ignore: true) final Status saveStatus}) = _$_UserPost;
 
   factory _UserPost.fromJson(Map<String, dynamic> json) = _$_UserPost.fromJson;
 
@@ -194,6 +228,9 @@ abstract class _UserPost implements UserPost {
   String? get body;
   @override
   String? get userName;
+  @override
+  @JsonKey(ignore: true)
+  Status get saveStatus;
   @override
   @JsonKey(ignore: true)
   _$$_UserPostCopyWith<_$_UserPost> get copyWith =>
