@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:login_ex_arbete/src/src.dart';
 
@@ -15,6 +16,7 @@ class UserPostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final createdAt = DateFormat('E,d MMM yyyy HH:mm:ss').format(post.createdAt ?? DateTime.now());
     return Card(
       color: Colors.grey[300],
       child: Padding(
@@ -30,6 +32,7 @@ class UserPostCard extends StatelessWidget {
                 const Spacer(),
               ],
             ),
+            Text(createdAt, style: const TextStyle(fontSize: 8.0)),
             Text(post.userName ?? 'Anonymous', style: const TextStyle(fontSize: 8.0)),
           ],
         ),
